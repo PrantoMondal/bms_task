@@ -1,11 +1,11 @@
-class userDetail {
+class UserDetail {
   String? name;
   String? email;
   String? image;
 
-  userDetail({this.name, this.email, this.image});
+  UserDetail({this.name, this.email, this.image});
 
-  userDetail.fromJson(Map<String,dynamic>json){
+  UserDetail.fromJson(Map<String,dynamic>json){
     name = json["name"];
     email = json["email"];
     image = json["image"];
