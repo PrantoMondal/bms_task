@@ -2,6 +2,7 @@ import 'package:bms_task/model/user_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
 class LoginController with ChangeNotifier {
   var _googleSignIn = GoogleSignIn();
   GoogleSignInAccount? googleSignInAccount;

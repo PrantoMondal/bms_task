@@ -26,19 +26,69 @@ class _HomePageState extends State<HomePage> {
 
   LoginUI() {
     return Consumer<LoginController>(builder: (context, model, child) {
-      if(model.userDetail != null){
+      // if we are already logged in
+      if (model.userDetail != null) {
         return Center(
           child: moviePageUI(model),
         );
-
-      }
-      else{
+      } else {
         return loginController(context);
       }
-    },);
+    });
   }
 
-  moviePageUI(moviePageController model) {}
+  moviePageUI(LoginController model) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          backgroundImage:
+          Image.network(model.userDetail!.image ?? "").image,
+          radius: 50,
+        ),
 
-  
+        Text(model.userDetail!.name ?? ""),
+        Text(model.userDetail!.email ?? ""),
+        ActionChip(
+            avatar: Icon(Icons.logout),
+            label: Text("Logout"),
+            onPressed: () {
+              Provider.of<LoginController>(context, listen: false).logout();
+            })
+      ],
+    );
+  }
+
+  loginController(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+              child: Image.asset(
+                "assets/images/google.png",
+                width: 240,
+              ),
+              onTap: () {
+                Provider.of<LoginController>(context, listen: false)
+                    .googleLogIn();
+              }),
+          SizedBox(
+            height: 10,
+          ),
+          GestureDetector(
+              child: Image.asset(
+                "assets/images/facebook.png",
+                width: 240,
+              ),
+              onTap: () {
+              //   Provider.of<LoginController>(context, listen: false)
+              //       .facebooklogin();
+               }
+              ),
+        ],
+      ),
+    );
+  }
 }
